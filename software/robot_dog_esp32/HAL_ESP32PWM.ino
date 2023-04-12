@@ -4,7 +4,7 @@ int esp32pwmServos[12];
 
 void initServoHAL() {
   Serial.print("ESP32_ISR ");
-  Serial.println(ESP32_ISR_SERVO_VERSION);
+  Serial.println(ESP32_NEW_ISR_SERVO_VERSION);
   ESP32_ISR_Servos.useTimer(USE_ESP32_TIMER_NO);
 
   /**
@@ -65,9 +65,12 @@ uint16_t angleToPulse(double angleRad) {
 void setLegPWM(leg &_leg)
 {
   uint8_t l = _leg.id.id*3;
-  ESP32_ISR_Servos.setPulseWidth(esp32pwmServos[l+0], angleToPulse(limitServoAngle(getHALAngle(_leg.angle.alpha, _leg.hal.mid.alpha, _leg.hal.trim.alpha, _leg.hal.ratio.alpha, _leg.inverse.alpha))));
-  ESP32_ISR_Servos.setPulseWidth(esp32pwmServos[l+1], angleToPulse(limitServoAngle(getHALAngle(_leg.angle.beta,  _leg.hal.mid.beta,  _leg.hal.trim.beta,  _leg.hal.ratio.beta,  _leg.inverse.beta ))));
-  ESP32_ISR_Servos.setPulseWidth(esp32pwmServos[l+2], angleToPulse(limitServoAngle(getHALAngle(_leg.angle.gamma, _leg.hal.mid.gamma, _leg.hal.trim.gamma, _leg.hal.ratio.gamma, _leg.inverse.gamma))));
+  unsigned int helper1 = (unsigned int) angleToPulse(limitServoAngle(getHALAngle(_leg.angle.alpha, _leg.hal.mid.alpha, _leg.hal.trim.alpha, _leg.hal.ratio.alpha, _leg.inverse.alpha)));
+  ESP32_ISR_Servos.setPulseWidth(esp32pwmServos[l+0], helper1);
+  unsigned int helper2 = (unsigned int) angleToPulse(limitServoAngle(getHALAngle(_leg.angle.beta,  _leg.hal.mid.beta,  _leg.hal.trim.beta,  _leg.hal.ratio.beta,  _leg.inverse.beta )));
+  ESP32_ISR_Servos.setPulseWidth(esp32pwmServos[l+1], helper2);
+  unsigned int helper3 = (unsigned int) angleToPulse(limitServoAngle(getHALAngle(_leg.angle.gamma, _leg.hal.mid.gamma, _leg.hal.trim.gamma, _leg.hal.ratio.gamma, _leg.inverse.gamma)));
+  ESP32_ISR_Servos.setPulseWidth(esp32pwmServos[l+2], helper3);
 
 //  Serial.print("Servo on leg ");
 //  Serial.println(_leg.id.id);
@@ -95,9 +98,10 @@ void setLegPWM(leg &_leg)
 void runServoCalibrate(leg &_leg)
 {
   uint8_t l = _leg.id.id*3;
-  ESP32_ISR_Servos.setPulseWidth(esp32pwmServos[l+0], servoMainProfile.deg90);
-  ESP32_ISR_Servos.setPulseWidth(esp32pwmServos[l+1], servoMainProfile.deg90);
-  ESP32_ISR_Servos.setPulseWidth(esp32pwmServos[l+2], servoMainProfile.deg90);
+  unsigned int helper4 = (unsigned int) servoMainProfile.deg90;
+  ESP32_ISR_Servos.setPulseWidth(esp32pwmServos[l+0], helper4);
+  ESP32_ISR_Servos.setPulseWidth(esp32pwmServos[l+1], helper4);
+  ESP32_ISR_Servos.setPulseWidth(esp32pwmServos[l+2], helper4);
 }
 
 #endif
