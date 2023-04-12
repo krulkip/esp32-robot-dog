@@ -19,7 +19,7 @@
 #include "cli.h"
 #include "subscription.h"
 
-#include <MPU9250_WE.h>
+#include <MPU9250_WE.h>   // library 1.2.6
 #include <Wire.h>
 
 #include "libs/IK/IK_simple.cpp"  // TODO this is for small dog only!!!
@@ -37,7 +37,7 @@
 
 #if PWM_CONTROLLER_TYPE == ESP32PWM
   #define USE_ESP32_TIMER_NO 3
-  #include "ESP32_ISR_Servo.h"
+  #include "ESP32_New_ISR_Servo.h" // ESP32_NEW_ISR_Servo library 1.4.0
 #endif
 
 #ifdef POWER_SENSOR
