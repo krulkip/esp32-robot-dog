@@ -1,5 +1,13 @@
 # Small Robot dog (quadruped)
 
+Just an update so that the newest libraries work.
+It compiles but i have not tested.
+ESP32 ISR Servo version 1.1.0 to ESP32 NEW ISR Servo version 1.4.0
+MPU9250_WE version 1.1.3 updated to 1.2.6
+ESP32 uses M5Stack 2.0.5 - 1.0 version
+Arduino 1.8.19
+
+
 ## Disclaimer
 **This project has been done mostly for fun about a year ago. Some libraries have been updated, so it basically does not work any more. Not every planned feature was released. No PCB is made and it creates a lot of trouble for most of you. I'm sorry to say, but I'm not going to provide any support for it any more. It's exhausting and sometimes just destroys any intentions to continue. This is not comercial project and I'm not going to do something like Donation. Maybe I'm disappointing someone. Sorry. Project closed.** 
 
